@@ -1,6 +1,6 @@
 package me.chyc.crawler;
 
-import me.chyc.utils.WebPageGetter;
+import me.chyc.http.WebPageGetter;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -39,6 +39,7 @@ public class SilukeCrawler {
 
     public static JSONObject updateNovel(JSONObject novel) throws Exception {
         String html = WebPageGetter.getWebPage(novel.getString("link"));
+        html = html.replace("\\u201c", "“").replace("\\u201d", "”");
         JSONObject contents = new JSONObject();
         if (novel.has("contents"))
             contents = novel.getJSONObject("contents");
@@ -49,11 +50,11 @@ public class SilukeCrawler {
         if (chapters != null) {
             boolean update = false;
             for (String chapterId : chapters.keySet()) {
-                if (contents.has(chapterId)){
+                if (contents.has(chapterId)) {
                     String content = contents.getJSONObject(chapterId).getString("content");
                     if (content == null || content.length() == 0)
                         update = true;
-                }else
+                } else
                     update = true;
 
                 if (update) {
@@ -92,7 +93,7 @@ public class SilukeCrawler {
             novel.put("file", novelFile.getAbsolutePath());
 
         String html = WebPageGetter.getWebPage(novel.getString("link"));
-
+        html = html.replace("\\u201c", "“").replace("\\u201d", "”");
         JSONObject contents = new JSONObject();
         if (novel.has("contents"))
             contents = novel.getJSONObject("contents");
@@ -105,11 +106,11 @@ public class SilukeCrawler {
         if (chapters != null) {
             boolean update = false;
             for (String chapterId : chapters.keySet()) {
-                if (contents.has(chapterId)){
+                if (contents.has(chapterId)) {
                     String content = contents.getJSONObject(chapterId).getString("content");
                     if (content == null || content.length() == 0)
                         update = true;
-                }else
+                } else
                     update = true;
 
                 if (update) {
@@ -168,7 +169,7 @@ public class SilukeCrawler {
 
     public static void save(JSONObject novel, File file) throws IOException {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-        bw.write(novel.toString());
+        bw.write(novel.toString().replace("},","},\n").replace("\\u201c", "“").replace("\\u201d", "”"));
         bw.newLine();
         bw.flush();
         bw.close();
@@ -179,13 +180,15 @@ public class SilukeCrawler {
         StringBuffer sb = new StringBuffer();
         String line;
         while ((line = br.readLine()) != null)
-            sb.append(line);
+            sb.append(line.replace("\\u201c", "“").replace("\\u201d", "”"));
         return new JSONObject(sb.toString());
     }
 
     public static void main(String args[]) throws Exception {
-        String baseDir = "/Users/chyc/Workspaces/IDEAProjects/Mine/";
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(baseDir + "crawler/data/siluke.info"))));
+//        getNovelList(null);
+        String baseDir = "/Users/chyc/Workspaces/Mine/";
+        String novelFileName = "crawler/data/siluke.info";
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(baseDir + novelFileName))));
         String line;
         int index = 0;
         while ((line = br.readLine()) != null) {
