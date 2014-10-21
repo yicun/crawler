@@ -7,7 +7,10 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,7 +121,7 @@ public class SilukeCrawlerWithMultiThread {
                                 else
                                     chapter.put("content", text.text());
                                 contents.put(chapterId, chapter);
-                                System.err.println("No." + no + ":\t" + novelID + "$ " +"\t"+contents.length()+ "\t" + chapter.getString("id") + ":\t" + chapter.getString("title"));
+                                System.err.println("No." + no + ":\t" + novelID + "$ " + "\t" + contents.length() + "\t" + chapter.getString("id") + ":\t" + chapter.getString("title"));
                                 System.err.flush();
 
                                 try {

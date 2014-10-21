@@ -34,5 +34,10 @@ public class Test {
         System.out.println((14022^hen) + 9);
         System.out.println((7623^fish) + 419);
         System.out.println((14482^bat) + 3488);
+
+
+
+
+
     }
 }
