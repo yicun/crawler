@@ -1,6 +1,6 @@
 package me.chyc.crawler;
 
-import me.chyc.http.WebPageGetter;
+import me.chyc.linkedin.http.WebPageGetter;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;

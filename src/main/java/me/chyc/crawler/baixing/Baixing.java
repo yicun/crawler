@@ -1,6 +1,6 @@
 package me.chyc.crawler.baixing;
 
-import me.chyc.http.WebPageGetter;
+import me.chyc.linkedin.http.WebPageGetter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

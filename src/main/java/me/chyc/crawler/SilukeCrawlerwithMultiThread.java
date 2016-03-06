@@ -1,8 +1,8 @@
 package me.chyc.crawler;
 
-import me.chyc.entity.Pair;
-import me.chyc.http.CrawlerProxyGetter;
-import me.chyc.http.WebPageGetter;
+import me.chyc.linkedin.entity.Pair;
+import me.chyc.linkedin.http.CrawlerProxyGetter;
+import me.chyc.linkedin.http.WebPageGetter;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -87,7 +87,7 @@ public class SilukeCrawlerWithMultiThread {
                     if (!novel.getString("file").equalsIgnoreCase(novelFile.getAbsolutePath()))
                         novel.put("file", novelFile.getAbsolutePath());
 
-                    String html = WebPageGetter.getWebPagewithProxy(novel.getString("link"), proxy.value1, proxy.value2, "GBK");
+                    String html = WebPageGetter.getWebPagewithProxy(novel.getString("link"), proxy.getValue1(), proxy.getValue2(), "GBK");
                     if (html == null)
                         html = "";
                     html = html.replace("\\u201c", "“").replace("\\u201d", "”");
@@ -114,7 +114,7 @@ public class SilukeCrawlerWithMultiThread {
                             if (update) {
                                 JSONObject chapter = chapters.getJSONObject(chapterId);
                                 String url = novel.getString("link") + chapter.get("link");
-                                Element cc = Jsoup.parse(WebPageGetter.getWebPagewithProxy(url, proxy.value1, proxy.value2, "GBK"));
+                                Element cc = Jsoup.parse(WebPageGetter.getWebPagewithProxy(url, proxy.getValue1(), proxy.getValue2(), "GBK"));
                                 Element text = cc.select("div#content").first();
                                 if (text == null)
                                     chapter.put("content", "");

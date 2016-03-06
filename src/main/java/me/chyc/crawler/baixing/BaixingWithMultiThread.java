@@ -1,8 +1,8 @@
 package me.chyc.crawler.baixing;
 
-import me.chyc.http.CrawlerProxyGetter;
-import me.chyc.http.ProxyInfo;
-import me.chyc.http.WebPageGetter;
+import me.chyc.linkedin.http.CrawlerProxyGetter;
+import me.chyc.linkedin.entity.ProxyInfo;
+import me.chyc.linkedin.http.WebPageGetter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

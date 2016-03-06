@@ -1,0 +1,13 @@
+/.settings/
+/target/
+/.classpath
+/.project
+/.idea/
+out/
+*/target/
+*.iml
+/bin
+.classpath
+/*.csv
+/*.txt
+/*.rs
